@@ -265,6 +265,8 @@ public enum MobNames {
 	Ginger_Cat,
 	Siamese_Cat,
 
+	Sulfur_Cube,
+
 	//cat types
 	Cat_AllBack,
 	Cat_Black,
@@ -306,7 +308,7 @@ public enum MobNames {
 			case CHICKEN:
 				return getChickenName((Chicken) entity);
 			case COPPER_GOLEM:
-				return getCopperGolemName(entity);
+				return getCopperGolemName((CopperGolem) entity);
 			case COW:
 				return getCowName((Cow) entity);
 			case CREAKING:
@@ -379,6 +381,8 @@ public enum MobNames {
 				return Skeleton;
 			case SLIME:
 				return Slime;
+			case SULFUR_CUBE:
+				return Sulfur_Cube;
 			case SNIFFER:
 				return Sniffer;
 			case SNOW_GOLEM:
@@ -664,30 +668,20 @@ public enum MobNames {
 		return Snow_Golem;
 	}
 
-	private static MobNames getCopperGolemName(Entity entity) {
+	private static MobNames getCopperGolemName(CopperGolem coppergolem) {
 		try {
-			// Paper API: getWeatheringState()
-			Object state = entity.getClass().getMethod("getWeatheringState").invoke(entity);
-			switch (state.toString()) {
-				case "EXPOSED":   return Exposed_Copper_Golem;
-				case "WEATHERED": return Weathered_Copper_Golem;
-				case "OXIDIZED":  return Oxidized_Copper_Golem;
-				default:          return Copper_Golem;
+			CopperGolem.CopperWeatherState state = coppergolem.getWeatherState();
+			if (state == CopperGolem.CopperWeatherState.EXPOSED) {
+				return Exposed_Copper_Golem;
 			}
-		} catch (NoSuchMethodException e) {
-			try {
-				// Spigot API fallback: getWeatherState()
-				Object state = entity.getClass().getMethod("getWeatherState").invoke(entity);
-				switch (state.toString()) {
-					case "EXPOSED":   return Exposed_Copper_Golem;
-					case "WEATHERED": return Weathered_Copper_Golem;
-					case "OXIDIZED":  return Oxidized_Copper_Golem;
-					default:          return Copper_Golem;
-				}
-			} catch (Exception ex) {
-				return Copper_Golem;
+			if (state == CopperGolem.CopperWeatherState.OXIDIZED) {
+				return Oxidized_Copper_Golem;
 			}
-		} catch (Exception e) {
+			if (state == CopperGolem.CopperWeatherState.WEATHERED) {
+				return Weathered_Copper_Golem;
+			}
+			return Copper_Golem;
+		} catch (Throwable t) {
 			return Copper_Golem;
 		}
 	}

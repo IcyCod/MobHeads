@@ -1340,6 +1340,17 @@ ListOfMobs:
     advancements:
       - "mobheads:firstmobhead first_mob_head"
       - "mobheads:thelegend27 slime"
+  Sulfur_Cube:
+    dropChance: DEFAULT
+    lootingBonus: DEFAULT
+    dropOnChargedCreeperDeath: true
+    broadcastMessage: true
+    displayName: "&eSulfur Cube Head"
+    random_uuid: d35dba88-d1c2-43a0-a78f-7990bb4bca00
+    textureCode: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2E5NTcwY2QxZGM0M2MxZTgzZjM2Y2M0OTk1NjY1NTEzZGMyNDA1ZGFkMjQxZDIxMTQyNDllOGRhOTc2ZmMzZCJ9fX0=
+    advancements:
+      - "mobheads:firstmobhead first_mob_head"
+      - "mobheads:thelegend27 sulfur_cube"
   Snow_Golem:
     dropChance: 1%
     lootingBonus: 0.35%
