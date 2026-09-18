@@ -16,6 +16,7 @@ import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 import java.util.Base64;
 import com.google.gson.JsonParser;
@@ -46,7 +47,8 @@ public class SkullFactory{
         ItemStack skull = new ItemStack(Material.PLAYER_HEAD, 1);
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
 
-        PlayerProfile profile = Bukkit.createPlayerProfile(UUID.randomUUID(), "MobHead");
+        UUID skullUUID = UUID.nameUUIDFromBytes(encodedTexture.getBytes(StandardCharsets.UTF_8));
+        PlayerProfile profile = Bukkit.createPlayerProfile(skullUUID, "MobHead");
         PlayerTextures textures = profile.getTextures();
 
         try {
